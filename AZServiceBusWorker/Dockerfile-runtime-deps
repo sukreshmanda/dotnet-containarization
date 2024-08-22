@@ -1,0 +1,10 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine AS build-env
+WORKDIR /App
+COPY . ./
+RUN dotnet restore AZServiceBusWorker.csproj
+RUN dotnet publish -c Release -o out AZServiceBusWorker.csproj --self-contained
+
+FROM mcr.microsoft.com/dotnet/runtime-deps:8.0-alpine as base
+WORKDIR /App
+COPY --from=build-env /App/out .
+ENTRYPOINT ["./AZServiceBusWorker"]

@@ -1,0 +1,10 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0-alpine as build
+COPY . /app
+WORKDIR /app
+RUN dotnet publish -c Release -o /publish WeatherForecastAPI.csproj --self-contained
+
+FROM mcr.microsoft.com/dotnet/runtime-deps:8.0-alpine as base
+COPY --from=build /publish /app
+WORKDIR /app
+EXPOSE 8080
+ENTRYPOINT ["./WeatherForecastAPI"]

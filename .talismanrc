@@ -1,0 +1,4 @@
+fileignoreconfig:
+- filename: AZServiceBusWorker/AZServiceBusWorker.csproj
+  checksum: aaaf03fa9db56a8284d9571971049d7d0e240ffdfaf4827bfd2feaabd8d4dd26
+version: ""

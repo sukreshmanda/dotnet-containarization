@@ -1,0 +1,6 @@
+fileignoreconfig:
+- filename: Dockerfile
+  checksum: 380dbd1817a9663dda44683b160bc3c915126914d2b5898552dea6afac2a9d4b
+- filename: AZServiceBusWorker.csproj
+  checksum: 3118ebf7bd5a260d9bcf36b1b95f4355cf7db9014cc9f78d0a0bdcb19455c868
+version: ""
