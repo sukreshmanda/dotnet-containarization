@@ -12,8 +12,17 @@ public class ConsumerWorker : BackgroundService
         {
             var connectionString = Environment.GetEnvironmentVariable("ServiceBusConnectionString");
             var queueName = Environment.GetEnvironmentVariable("QueueName");
+            var subscriptionName = Environment.GetEnvironmentVariable("SubscriptionName");
             ServiceBusClient client = new ServiceBusClient(connectionString);
-            ServiceBusReceiver receiver = client.CreateReceiver(queueName);
+            ServiceBusReceiver receiver;
+            if(subscriptionName != null){
+                Console.WriteLine($"Listening on the subscription {subscriptionName} from topic {queueName}");
+                receiver = client.CreateReceiver(queueName, subscriptionName);
+            }else{
+                Console.WriteLine($"Listening on the queue {queueName}");
+                receiver = client.CreateReceiver(queueName);
+            }
+            
 
             var message = await receiver.ReceiveMessageAsync(cancellationToken: stoppingToken);
             if (new Random().NextInt64() % 2 == 0)

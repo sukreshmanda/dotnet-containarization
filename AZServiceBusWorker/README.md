@@ -12,22 +12,14 @@ This is a POC application to use Azure Service Bus in c# application
 start docker in you machine
 ### Build image
 ```bash
-docker build -t azservicebus-worker:v1 .
+docker build -t azservicebus-worker:v1 -f Dockerfile-runtime .
 ```
 ### Start Producer
 ```bash
-docker run -it -e Producer='true' \ 
-    -e ServiceBusConnectionString="<connection-string>" \
-    -e QueueName="<queue-name>" \
-    -h producer-a \
-    azservicebus-worker:v1
+docker run -it -e Producer='true' -e ServiceBusConnectionString="<connection-string>" -e QueueName="<queue-name>" -h producer-a azservicebus-worker:v1
 ```
 
 ### Start Consumer
 ```bash
-docker run -e Consumer='true' \
-    -e ServiceBusConnectionString="<connection-string>" \
-    -e QueueName="<queue-name>" \
-    -h consumer-a \
-    azservicebus-worker:v1
+docker run -e Consumer='true' -e ServiceBusConnectionString="<connection-string>" -e QueueName="<queue-name>" -h consumer-a azservicebus-worker:v1
 ```
