@@ -19,7 +19,12 @@ docker build -t azservicebus-worker:v1 -f Dockerfile-runtime .
 docker run -it -e Producer='true' -e ServiceBusConnectionString="<connection-string>" -e QueueName="<queue-name>" -h producer-a azservicebus-worker:v1
 ```
 
-### Start Consumer
+### Start Consumer as Queue
 ```bash
 docker run -e Consumer='true' -e ServiceBusConnectionString="<connection-string>" -e QueueName="<queue-name>" -h consumer-a azservicebus-worker:v1
+```
+
+### Start Consumer as Subscription
+```bash
+docker run -e Consumer='true' -e ServiceBusConnectionString="<connection-string>" -e QueueName="<topic-name>" -e SubscriptionName="<subscription-name>" -h consumer-a azservicebus-worker:v1
 ```
